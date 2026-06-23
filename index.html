@@ -1,10 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My First Site</title>
+    <meta charset="UTF-8">
+    <title>Simple Client Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            min-height: 100px;
+        }
+
+        .label {
+            font-size: 14px;
+            color: #555;
+            margin-top: 15px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hello World!</h1>
-    <p>This website is hosted on GitHub Pages.</p>
+
+<div class="container">
+    <h1>Client Dashboard</h1>
+
+    <div class="label">Enter your request:</div>
+    <input type="text" id="userInput" placeholder="Type something...">
+
+    <div class="label">Upload file:</div>
+    <input type="file" id="fileInput">
+
+    <button onclick="handleSubmit()">Submit</button>
+
+    <div class="output" id="outputBox">
+        Results will appear here...
+    </div>
+</div>
+
+<script>
+    function handleSubmit() {
+        const text = document.getElementById("userInput").value;
+        const file = document.getElementById("fileInput").files[0];
+
+        let output = "";
+
+        if (text) {
+            output += "📝 Input text: " + text + "<br><br>";
+        }
+
+        if (file) {
+            output += "📁 File uploaded: " + file.name;
+        }
+
+        if (!text && !file) {
+            output = "⚠️ Please enter text or upload a file.";
+        }
+
+        document.getElementById("outputBox").innerHTML = output;
+    }
+</script>
+
 </body>
 </html>
