@@ -32,13 +32,6 @@ input[type="text"] {
     margin-top: 8px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    outline: none;
-    transition: 0.2s;
-}
-
-input[type="text"]:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74,144,226,0.4);
 }
 
 input[type="file"] {
@@ -55,12 +48,10 @@ button {
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
 }
 
 button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+    opacity: 0.9;
 }
 
 .output {
