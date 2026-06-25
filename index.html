@@ -27,26 +27,45 @@
 </div>
 
 <script>
-    function handleSubmit() {
-        const text = document.getElementById("userInput").value;
-        const file = document.getElementById("fileInput").files[0];
+async function handleSubmit() {
+    const text = document.getElementById("userInput").value;
+    const file = document.getElementById("fileInput").files[0];
 
-        let output = "";
+    const outputBox = document.getElementById("outputBox");
 
-        if (text) {
-            output += "📝 Input text: " + text + "<br><br>";
-        }
-
-        if (file) {
-            output += "📁 File uploaded: " + file.name;
-        }
-
-        if (!text && !file) {
-            output = "⚠️ Please enter text or upload a file.";
-        }
-
-        document.getElementById("outputBox").innerHTML = output;
+    if (!text && !file) {
+        outputBox.innerHTML = "⚠️ Please enter text or upload a file.";
+        return;
     }
+
+    const formData = new FormData();
+
+    // backend expects "question"
+    formData.append("question", text);
+
+    // backend expects "file"
+    if (file) {
+        formData.append("file", file);
+    }
+
+    outputBox.innerHTML = "⏳ Processing...";
+
+    try {
+        const res = await fetch("https://YOUR_NGROK_URL/ask", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        outputBox.innerHTML =
+            "<b>Answer:</b><br><br>" + data.answer;
+
+    } catch (err) {
+        outputBox.innerHTML =
+            "❌ Error connecting to server";
+    }
+}
 </script>
 
 </body>
