@@ -59,7 +59,11 @@ async function handleSubmit() {
         const data = await res.json();
 
         outputBox.innerHTML =
-            "<b>Answer:</b><br><br>" + data.answer;
+            "<b>Keywords:</b> " + data.keywords.join(", ") +
+            "<br><br><b>Relevant Chunks:</b><br><br>" +
+            data.chunks.join("<hr>");
+
+    
 
     } catch (err) {
         outputBox.innerHTML =
