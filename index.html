@@ -48,6 +48,9 @@ async function handleSubmit() {
         formData.append("file", file);
     }
 
+
+    
+
     outputBox.innerHTML = "⏳ Processing...";
 
     try {
@@ -58,10 +61,13 @@ async function handleSubmit() {
 
         const data = await res.json();
 
-        outputBox.innerHTML =
-            "<b>Keywords:</b> " + data.keywords.join(", ") +
-            "<br><br><b>Relevant Chunks:</b><br><br>" +
-            data.chunks.join("<hr>");
+        outputBox.innerHTML = "<b>Keywords:</b> " + data.keywords.join(", ") +
+        "<br><br><b>Reranked Chunks:</b><br><br>" +
+        data.reranked_chunks.join("<hr>") +
+        "<br><br><b>Semantic Chunks:</b><br><br>" +
+        data.semantic_chunks.join("<hr>") +
+        "<br><br><b>Final Chunks:</b><br><br>" +
+        data.final_chunks.join("<hr>");
 
     
 
