@@ -61,13 +61,69 @@ async function handleSubmit() {
 
         const data = await res.json();
 
-        outputBox.innerHTML = "<b>Keywords:</b> " + data.keywords.join(", ") +
-        "<br><br><b>Reranked Chunks:</b><br><br>" +
-        data.reranked_chunks.join("<hr>") +
-        "<br><br><b>Semantic Chunks:</b><br><br>" +
-        data.semantic_chunks.join("<hr>") +
-        "<br><br><b>Final Chunks:</b><br><br>" +
-        data.final_chunks.join("<hr>");
+        outputBox.innerHTML =
+    "<b>Keywords:</b> " + data.keywords.join(", ") +
+
+    "<br><br><b>Reranked Chunks:</b><br><br>" +
+
+    data.reranked_chunks.map(x =>
+        `
+        <b>Text:</b><br>
+        ${x.chunk}
+
+        <br>
+        Keyword score:
+        ${x.kw_score}
+
+        <br>
+        Reranker score:
+        ${x.reranker_score}
+
+        <br>
+        Combined score:
+        ${x.combined_score}
+
+        <hr>
+        `
+    ).join("") +
+
+    "<br><br><b>Semantic Chunks:</b><br><br>" +
+
+    data.semantic_chunks.map(x =>
+        `
+        <b>Text:</b><br>
+        ${x.chunk}
+
+        <br>
+        Semantic score:
+        ${x.semantic_score}
+
+        <hr>
+        `
+    ).join("") +
+
+    "<br><br><b>Final Chunks:</b><br><br>" +
+
+    data.final_chunks.map(x =>
+        `
+        <b>Text:</b><br>
+        ${x.chunk}
+
+        <br>
+        Keyword score:
+        ${x.kw_score ?? "N/A"}
+
+        <br>
+        Reranker score:
+        ${x.reranker_score ?? "N/A"}
+
+        <br>
+        Semantic score:
+        ${x.semantic_score ?? "N/A"}
+
+        <hr>
+        `
+    ).join("");
 
     
 
